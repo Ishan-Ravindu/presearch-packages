@@ -46,6 +46,7 @@ function execCallback(error) {
             let packageInfo = fs.readFileSync(`./packages/${packageName}/package.json`);
             packageInfo = JSON.parse(packageInfo);
             packageInfo.author = userName;
+            packageInfo.packageType = "default";
             packageInfo.license = "MIT";
             packageInfo = JSON.stringify(packageInfo);
             packageInfo = packageInfo.split(",").join(",\n ").split("{").join("{\n ").split("}").join("\n}");
