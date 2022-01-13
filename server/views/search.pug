@@ -8,5 +8,9 @@ block content
             include ./_partials/error
             include ./_partials/presearch-package
             div(class="w-full 2lg:flex 2lg:flex-row-reverse 2lg:justify-end")
-                include ./_partials/special-sections/info
-                include ./_partials/standard-results
+                div(class="flex flex-col")   
+                    include ./_partials/presearch-side-package
+                    include ./_partials/special-sections/info
+                div(class="flex flex-col")
+                    include ./_partials/presearch-lite-package
+                    include ./_partials/standard-results
