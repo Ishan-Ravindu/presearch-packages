@@ -23,13 +23,13 @@ const addRoutesInterval = setInterval(() => {
         clearInterval(addRoutesInterval);
         Object.keys(packageObject).forEach((packageName) => {
             let packageInfo = fs.readFileSync(`../packages/${packageName}/package.json`);
-            const { version, author } = JSON.parse(packageInfo);
+            const { version, author,packageType } = JSON.parse(packageInfo);
             app.get(`/${packageName}`, async (req, res) => {
                 const query = req.query.q ? req.query.q : "";
                 const trigger = await packageObject[packageName].trigger(query);
                 if (trigger) {
                     const packageData = await packageObject[packageName][packageName](query, process.env[`API.${packageName.toUpperCase()}`]);
-                    return res.render("search", { title: packageName, packageData, triggered: true, query, packageInfo: JSON.stringify({ version, author }) });
+                    return res.render("search", { title: packageName, packageData, triggered: true, query, packageInfo: JSON.stringify({ version, author,packageType }) });
                 }
                 res.render("search", { title: packageName, triggered: false, query, packageInfo });
             });
